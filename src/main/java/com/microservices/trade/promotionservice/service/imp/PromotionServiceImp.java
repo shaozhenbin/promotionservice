@@ -2,23 +2,18 @@ package com.microservices.trade.promotionservice.service.imp;
 
 import com.microservices.trade.promotionservice.dao.PromotionDAO;
 import com.microservices.trade.promotionservice.dao.PromotionUserDAO;
-import com.microservices.trade.promotionservice.dao.VoucherDAO;
 import com.microservices.trade.promotionservice.domain.DO.PromotionDO;
 import com.microservices.trade.promotionservice.domain.DO.PromotionUserDO;
-import com.microservices.trade.promotionservice.domain.DO.VoucherDO;
 import com.microservices.trade.promotionservice.domain.VO.PromotionVO;
-import com.microservices.trade.promotionservice.domain.VO.VoucherVO;
 import com.microservices.trade.promotionservice.domain.module.PromotionLimitTypeEnum;
 import com.microservices.trade.promotionservice.domain.module.PromotionStatusEnum;
 import com.microservices.trade.promotionservice.service.PromotionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Space
@@ -58,15 +53,7 @@ public class PromotionServiceImp implements PromotionService {
         log.info("查询到相关优惠, userId:{}, productId: {}, result: {}", userId, productId, promotionDOS
                 .toString());
 
-        //当前时间戳
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        Date day = calendar.getTime();
-        Long timestamp = day.getTime();
-
+        Long timestamp = getCorrectDayTimeStamp();
         //过滤不可用优惠
         List<PromotionVO> promotionVOS = new ArrayList<>();
         promotionDOS.stream().forEach(promotionDO -> {
@@ -114,5 +101,63 @@ public class PromotionServiceImp implements PromotionService {
         log.info("queryAvailablePromotions userId:{}, productId:{},get Promotion Number:{} And " +
                 "result:{}", userId, productId, promotionDOS.size(), promotionVOS.toString());
         return promotionVOS;
+    }
+
+    @Override
+    public Boolean modifyPromotion(Long userId, Long promotionMapId, Integer status) {
+        if(userId==null||promotionMapId==null||status==null){
+            return false;
+        }
+
+        Optional<PromotionUserDO> promotionUserDOOptional = promotionUserDAO.findById(promotionMapId);
+        if(!promotionUserDOOptional.isPresent()){
+            return false;
+        }
+        PromotionUserDO promotionUserDO = promotionUserDOOptional.get();
+        if(promotionUserDO.getPromotionStatus() == status){
+            return true;
+        }
+        //update
+        Long updateCount = promotionUserDAO.modifyStatus(promotionMapId, userId, status);
+        if (updateCount != 1) {
+            log.error("Modify Promotion Status Error update Count: {}, userId: {}, " +
+                    "promotionMapId: {}", updateCount, userId, promotionMapId);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public PromotionUserDO verifyPromotion(Long userId, Long promotionId) {
+        if(userId==null||promotionId == null){
+            return null;
+        }
+        Optional<PromotionDO> promotionDO =promotionDAO.findById(promotionId);
+        if(!promotionDO.isPresent()){
+            return null;
+        }
+
+        PromotionUserDO promotionUserDO = buildPromotionDO(userId,promotionId);
+        promotionUserDO = promotionUserDAO.save(promotionUserDO);
+        return promotionUserDO;
+    }
+
+    private PromotionUserDO buildPromotionDO(Long userId, Long promotionId){
+        PromotionUserDO promotionUserDO = new PromotionUserDO();
+        promotionUserDO.setUserId(userId);
+        promotionUserDO.setPromotionId(promotionId);
+        promotionUserDO.setPromotionStatus(PromotionStatusEnum.used.getValue());
+        promotionUserDO.setUseTimeStamp(new Date().getTime());
+        return promotionUserDO;
+    }
+
+    private Long getCorrectDayTimeStamp(){
+        //当天时间戳
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        return calendar.getTimeInMillis();
     }
 }

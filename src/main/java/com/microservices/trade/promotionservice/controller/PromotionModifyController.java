@@ -1,9 +1,11 @@
 package com.microservices.trade.promotionservice.controller;
 
+import com.microservices.trade.promotionservice.domain.DO.PromotionUserDO;
 import com.microservices.trade.promotionservice.domain.DO.VoucherDO;
 import com.microservices.trade.promotionservice.domain.VO.VoucherVO;
 import com.microservices.trade.promotionservice.service.PromotionService;
 import com.microservices.trade.promotionservice.service.imp.VoucherServiceImp;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import common.ObjectResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,14 +52,24 @@ public class PromotionModifyController {
 
     @ResponseBody
     @RequestMapping("/promotion/status")
-    public Long modifyPromotion(@RequestParam Long userId, @RequestParam Long promotionMapId,
+    public Boolean modifyPromotion(@RequestParam Long userId, @RequestParam Long promotionMapId,
                                 @RequestParam Integer status){
-        log.info("modify promotion,userId: {}, promotionId: {}, status: {}",userId,
+        log.info("modify promotion,userId: {}, promotionMapId: {}, status: {}",userId,
                 promotionMapId, status);
-        VoucherVO voucherVO = promotionService.modifyPromotion(userId, promotionMapId, status);
-        log.info("modify promotion,userId: {}, promotionId: {}, status: {},result: {}",userId,
-                voucherId, status, voucherVO);
-        return voucherVO;
+        Boolean result = promotionService.modifyPromotion(userId, promotionMapId, status);
+        log.info("modify promotion,userId: {}, promotionMapId: {}, status: {}, result: {}",userId,
+                promotionMapId, status, result);
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping("/promotion/verify")
+    public Long verifyPromotion(@RequestParam Long userId, @RequestParam Long promotionId){
+        log.info("verify promotion,userId: {}, promotionId: {}",userId, promotionId);
+        PromotionUserDO promotionUserDO = promotionService.verifyPromotion(userId, promotionId);
+        log.info("verify promotion,userId: {}, promotionId: {},result: {}",userId,
+                promotionId, promotionUserDO);
+        return promotionUserDO.getId();
     }
 
 

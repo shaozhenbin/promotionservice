@@ -33,5 +33,5 @@ public class PromotionUserDO implements Serializable {
     private Long useTimeStamp;
 
     @Column(nullable = false)
-    private Long promotionStatus;
+    private Integer promotionStatus;
 }
