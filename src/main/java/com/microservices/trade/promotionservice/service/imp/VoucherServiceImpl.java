@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
-public class VoucherServiceImp implements VoucherService {
+public class VoucherServiceImpl implements VoucherService {
     @Resource
     private VoucherDAO voucherDAO;
 

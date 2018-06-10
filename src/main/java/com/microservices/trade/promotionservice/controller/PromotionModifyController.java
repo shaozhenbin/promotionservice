@@ -3,7 +3,7 @@ package com.microservices.trade.promotionservice.controller;
 import com.microservices.trade.promotionservice.domain.DO.PromotionUserDO;
 import com.microservices.trade.promotionservice.domain.VO.VoucherVO;
 import com.microservices.trade.promotionservice.service.PromotionService;
-import com.microservices.trade.promotionservice.service.imp.VoucherServiceImp;
+import com.microservices.trade.promotionservice.service.imp.VoucherServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +32,7 @@ public class PromotionModifyController {
     private PromotionService promotionService;
 
     @Resource
-    private VoucherServiceImp voucherService;
+    private VoucherServiceImpl voucherService;
 
     @ResponseBody
     @RequestMapping("/voucher/status")
