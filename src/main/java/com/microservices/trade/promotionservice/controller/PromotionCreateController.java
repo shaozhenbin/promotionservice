@@ -3,6 +3,8 @@ package com.microservices.trade.promotionservice.controller;
 import com.microservices.trade.promotionservice.domain.VO.PromotionVO;
 import com.microservices.trade.promotionservice.domain.VO.VoucherVO;
 import com.microservices.trade.promotionservice.service.PromotionService;
+import com.microservices.trade.promotionservice.service.VoucherService;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,18 +28,33 @@ public class PromotionCreateController {
     @Resource
     private PromotionService promotionService;
 
+    @Resource
+    private VoucherService voucherService;
+
     @ResponseBody
     @RequestMapping(value = "/create/promotion", method = RequestMethod.POST)
-    public Long CreatePromotion(@RequestBody PromotionVO promotionVO){
-        log.info("Create promotion:{}",promotionVO);
-        Long promotionId = promotionService.savePromotion(promotionVO);
-        return promotionId;
+    public Long createPromotion(@RequestBody PromotionVO promotionVO){
+        log.info("Create promotion:{}", promotionVO);
+        promotionVO = promotionService.savePromotion(promotionVO);
+        log.info("Create promotion result:{}", promotionVO);
+        return promotionVO.getId();
     }
 
     @ResponseBody
     @RequestMapping(value = "/create/voucher", method = RequestMethod.POST)
-    public Long CreateVoucher(@RequestBody VoucherVO voucherVO){
-        Long vourcherId = promotionService.saveVouchar(voucherVO);
-        return vourcherId;
+    public Long createVoucher(@RequestBody VoucherVO voucherVO){
+        log.info("Create voucher:{}", voucherVO);
+        voucherVO = voucherService.saveVoucher(voucherVO);
+        log.info("Create voucher result:{}", voucherVO);
+        return voucherVO.getId();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/offer/voucher")
+    public Long offerVoucher(@RequestParam Long userId, Long voucherId){
+        log.info("offer userId: {}, voucherId: {}", userId, voucherId);
+        Long realId  = voucherService.offerVoucher(userId,voucherId);
+        log.info("offer userId: {}, voucherId: {}, resultId ", userId, voucherId,realId);
+        return realId;
     }
 }

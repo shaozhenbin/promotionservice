@@ -14,9 +14,12 @@ import java.io.Serializable;
 @Data
 public class PromotionVO implements Serializable {
 
+    //此处 id 应为促销活动id。 PromotionUser 只做用户使用情况的统计。
     private Long id;
-    private Long stock;
-    private Long Amount;
-    private Long Limit;
+    private Long productId;
+    private Long amount;
+    private Long limitCount;
+    private Integer limitType;
     private String title;
+    private Integer source;
 }

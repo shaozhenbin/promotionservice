@@ -13,10 +13,13 @@ import java.io.Serializable;
  */
 @Data
 public class VoucherVO implements Serializable {
-
+    // 应该是 VoucherUser的Id。。这样一个人得到多张同批次券，编号不一样。
     private Long id;
-    private Long stock;
+    private Long userId;
     private Long Amount;
     private Long LimitMoney;
+    private Long timeStart;
+    private Long timeEnd;
+    private Integer voucherStatus;
     private String title;
 }

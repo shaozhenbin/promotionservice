@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.beans.IntrospectionException;
 import java.io.Serializable;
 
 /**
@@ -23,14 +24,20 @@ public class PromotionDO implements Serializable{
     private Long id;
 
     @Column(nullable = false)
-    private Long stock;
+    private Long productId;
 
     @Column(nullable = false)
-    private Long Amount;
+    private Long amount;
 
     @Column(nullable = false)
-    private Long Limit;
+    private Long limitCount;
+
+    @Column(nullable = false)
+    private Integer limitType;
 
     @Column(nullable = false)
     private String title;
+
+    @Column(nullable = false)
+    private Integer source;
 }

@@ -14,6 +14,7 @@ import java.io.Serializable;
 @Data
 public class ObjectResponse<T> implements Serializable{
     private T t;
+    private Integer code;
     private String msg;
 
 }

@@ -11,31 +11,24 @@ import java.io.Serializable;
 /**
  * Created by Space
  * Date: 2018/6/10 0010.
- * Time: 10:16.
+ * Time: 15:32.
  * Desc:
  * ==================================
  */
+
 @Data
 @Entity
-public class VoucherDO implements Serializable {
-
+public class PromotionUserDO implements Serializable {
     @Id
     @GeneratedValue
-    private Long id;
+    private Long Id;
 
     @Column(nullable = false)
-    private Long Amount;
+    private Long userId;
 
     @Column(nullable = false)
-    private Long LimitMoney;
+    private Long promotionId;
 
     @Column(nullable = false)
-    private Long timeStart;
-
-    @Column(nullable = false)
-    private Long timeEnd;
-
-    @Column(nullable = false)
-    private String title;
-
+    private Long useTimeStamp;
 }
