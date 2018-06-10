@@ -75,11 +75,10 @@ public class PromotionServiceImpl implements PromotionService {
             return false;
         }
 
-        Optional<PromotionUserDO> promotionUserDOOptional = promotionUserDAO.findById(promotionMapId);
-        if (!promotionUserDOOptional.isPresent()) {
+        PromotionUserDO promotionUserDO = promotionUserDAO.findById(promotionMapId);
+        if (promotionUserDO == null) {
             return false;
         }
-        PromotionUserDO promotionUserDO = promotionUserDOOptional.get();
         if (promotionUserDO.getPromotionStatus() == status) {
             return true;
         }
@@ -115,8 +114,8 @@ public class PromotionServiceImpl implements PromotionService {
         if (userId == null || promotionId == null) {
             return null;
         }
-        Optional<PromotionDO> promotionDO = promotionDAO.findById(promotionId);
-        if (!promotionDO.isPresent()) {
+        PromotionDO promotionDO = promotionDAO.findById(promotionId);
+        if (promotionDO ==null) {
             return null;
         }
 
