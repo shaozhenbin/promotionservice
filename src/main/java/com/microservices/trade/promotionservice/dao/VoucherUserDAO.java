@@ -16,7 +16,7 @@ import java.util.List;
  * ==================================
  */
 public interface VoucherUserDAO extends JpaRepository<VoucherUserDO,Long> {
-    VoucherUserDO findById(Long id);
+//    VoucherUserDO findById(Long id);
     List<VoucherUserDO> findAllByUserId(Long userId);
     List<VoucherUserDO> findAllByUserIdAndVoucherStatus(Long userId,Integer status);
     List<VoucherUserDO> findAllByUserIdAndVoucherStatusIsNot(Long userId,Integer status);

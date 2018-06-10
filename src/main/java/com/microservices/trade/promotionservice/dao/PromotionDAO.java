@@ -16,7 +16,7 @@ import java.util.List;
 
 public interface PromotionDAO extends JpaRepository<PromotionDO, Long>{
 
-    PromotionDO findById(Long id);
+//    PromotionDO findById(Long id);
     PromotionDO findByIdAndLimitMoneyIsLessThanEqual(Long promotionId, Long amount);
     List<PromotionDO> findAllByProductIdAndLimitMoneyLessThanEqual(Long productId, Long amount);
 }

@@ -75,7 +75,7 @@ public class PromotionServiceImpl implements PromotionService {
             return false;
         }
 
-        PromotionUserDO promotionUserDO = promotionUserDAO.findById(promotionMapId);
+        PromotionUserDO promotionUserDO = promotionUserDAO.findOne(promotionMapId);
         if (promotionUserDO == null) {
             return false;
         }
@@ -114,7 +114,7 @@ public class PromotionServiceImpl implements PromotionService {
         if (userId == null || promotionId == null) {
             return null;
         }
-        PromotionDO promotionDO = promotionDAO.findById(promotionId);
+        PromotionDO promotionDO = promotionDAO.findOne(promotionId);
         if (promotionDO ==null) {
             return null;
         }

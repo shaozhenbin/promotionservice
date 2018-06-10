@@ -133,10 +133,10 @@ public class VoucherServiceImpl implements VoucherService {
                 log.error("抵用券状态更新失败, status: {}, updateCount: {}",status,updateCount);
                 return null;
             }
-            voucherUserDO = voucherUserDAO.findById(voucherMapId);
+            voucherUserDO = voucherUserDAO.findOne(voucherMapId);
         }
 
-        VoucherDO voucherDO = voucherDAO.findById(voucherUserDO.getVoucherId());
+        VoucherDO voucherDO = voucherDAO.findOne(voucherUserDO.getVoucherId());
         if (voucherDO == null) {
             log.error("未查询到抵用券, userId:{}, voucherId: {}", userId, voucherUserDO.getVoucherId());
             return null;

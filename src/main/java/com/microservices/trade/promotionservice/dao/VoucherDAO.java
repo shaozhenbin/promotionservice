@@ -14,7 +14,7 @@ import java.util.List;
  * ==================================
  */
 public interface VoucherDAO extends JpaRepository<VoucherDO,Long> {
-    VoucherDO findById(Long id);
+//    VoucherDO findById(Long id);
     List<VoucherDO> findAllByIdInAndTimeEndGreaterThan(List<Long> voucherId,Long correctTime);
     List<VoucherDO> findAllByIdInAndTimeEndLessThan(List<Long> voucherId,Long correctTime);
     List<VoucherDO> findAllByIdIn(List<Long> voucherId);

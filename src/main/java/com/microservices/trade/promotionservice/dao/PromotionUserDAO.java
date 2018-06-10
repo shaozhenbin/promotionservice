@@ -16,7 +16,7 @@ import java.util.List;
  * ==================================
  */
 public interface PromotionUserDAO extends JpaRepository<PromotionUserDO, Long> {
-    PromotionUserDO findById(Long id);
+//    PromotionUserDO findById(Long id);
     List<PromotionUserDO> findAllByUserIdAndPromotionIdAndUseTimeStampGreaterThanEqualAndPromotionStatus
             (Long userId, Long PromotionId, Long timestamp, Integer status);
 
