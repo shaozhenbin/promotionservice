@@ -1,6 +1,4 @@
-package com.microservices.trade.promotionservice.domain;
-
-import javax.persistence.criteria.CriteriaBuilder;
+package com.microservices.trade.promotionservice.domain.module;
 
 /**
  * Created by Space

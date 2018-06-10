@@ -5,7 +5,7 @@ import com.microservices.trade.promotionservice.dao.VoucherUserDAO;
 import com.microservices.trade.promotionservice.domain.DO.VoucherDO;
 import com.microservices.trade.promotionservice.domain.DO.VoucherUserDO;
 import com.microservices.trade.promotionservice.domain.VO.VoucherVO;
-import com.microservices.trade.promotionservice.domain.VoucherStatusEnum;
+import com.microservices.trade.promotionservice.domain.module.VoucherStatusEnum;
 import com.microservices.trade.promotionservice.service.VoucherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;

@@ -10,7 +10,7 @@ package com.microservices.trade.promotionservice.domain.module;
 public enum PromotionLimitTypeEnum {
     limitByDay(1),
     limitAllTime(2),
-    limitByOrder(3);
+    free(3);
 
     private Integer value;
     PromotionLimitTypeEnum(Integer value){

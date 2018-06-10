@@ -33,6 +33,9 @@ public class PromotionDO implements Serializable{
     private Long limitCount;
 
     @Column(nullable = false)
+    private Long limitMoney;
+
+    @Column(nullable = false)
     private Integer limitType;
 
     @Column(nullable = false)

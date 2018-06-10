@@ -34,9 +34,9 @@ public class PromotionCreateController {
     @ResponseBody
     @RequestMapping(value = "/create/promotion", method = RequestMethod.POST)
     public Long createPromotion(@RequestBody PromotionVO promotionVO){
-        log.info("Create promotion:{}", promotionVO);
+        log.info("Create promotion: {}", promotionVO);
         promotionVO = promotionService.savePromotion(promotionVO);
-        log.info("Create promotion result:{}", promotionVO);
+        log.info("Create promotion result: {}", promotionVO);
         return promotionVO.getId();
     }
 

@@ -45,10 +45,10 @@ public class PromotionQueryController {
 
     @RequestMapping("/query/promotion")
     public List<PromotionVO> queryAllPromotion(@RequestParam Long userId, @RequestParam Long
-            productId){
+            productId, @RequestParam Long amount){
         log.info("Query all promotion with userId: {}, productId: {}", userId, productId);
         List<PromotionVO> promotionVOS = promotionService.queryAvailablePromotions(userId,
-                productId);
+                productId, amount);
         log.info("Query all promotion with userId: {}, productId: {}, result: {}", userId,
                 productId, promotionVOS.toString());
         return promotionVOS;

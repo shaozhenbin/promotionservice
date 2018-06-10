@@ -17,5 +17,5 @@ import java.util.List;
 @Component
 public interface PromotionService {
     PromotionVO savePromotion(PromotionVO promotionVO);
-    List<PromotionVO> queryAvailablePromotions(Long userId, Long productId);
+    List<PromotionVO> queryAvailablePromotions(Long userId, Long productId, Long amount);
 }

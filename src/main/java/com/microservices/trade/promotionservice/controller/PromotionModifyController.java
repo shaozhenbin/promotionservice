@@ -48,4 +48,17 @@ public class PromotionModifyController {
     }
 
 
+    @ResponseBody
+    @RequestMapping("/promotion/status")
+    public Long modifyPromotion(@RequestParam Long userId, @RequestParam Long promotionMapId,
+                                @RequestParam Integer status){
+        log.info("modify promotion,userId: {}, promotionId: {}, status: {}",userId,
+                promotionMapId, status);
+        VoucherVO voucherVO = promotionService.modifyPromotion(userId, promotionMapId, status);
+        log.info("modify promotion,userId: {}, promotionId: {}, status: {},result: {}",userId,
+                voucherId, status, voucherVO);
+        return voucherVO;
+    }
+
+
 }
