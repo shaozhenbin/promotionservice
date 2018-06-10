@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 import static com.microservices.trade.promotionservice.configuration.WebConfiguration.BASIC_URL;
-import static com.microservices.trade.promotionservice.configuration.WebConfiguration.UPDATE_PROMOTION;
+import static com.microservices.trade.promotionservice.configuration.WebConfiguration.CREATE_PROMOTION;
 
 /**
  * Created by Space
@@ -22,7 +22,7 @@ import static com.microservices.trade.promotionservice.configuration.WebConfigur
  */
 @Slf4j
 @RestController
-@RequestMapping(BASIC_URL+UPDATE_PROMOTION)
+@RequestMapping(BASIC_URL+CREATE_PROMOTION)
 public class PromotionCreateController {
 
     @Resource

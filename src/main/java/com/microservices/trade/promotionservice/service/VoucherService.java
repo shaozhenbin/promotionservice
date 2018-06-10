@@ -12,7 +12,6 @@ import java.util.List;
  * Desc:
  * ==================================
  */
-@Component
 public interface VoucherService {
     VoucherVO saveVoucher(VoucherVO voucherVO);
     List<VoucherVO> queryVoucherByUserId(Long userId, Boolean available);

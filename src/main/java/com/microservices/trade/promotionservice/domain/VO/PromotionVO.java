@@ -20,6 +20,7 @@ public class PromotionVO implements Serializable {
     private Long amount;
     private Long limitCount;
     private Integer limitType;
+    private Long limitMoney;
     private String title;
     private Integer source;
 }

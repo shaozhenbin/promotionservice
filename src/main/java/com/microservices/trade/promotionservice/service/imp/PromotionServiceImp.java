@@ -10,6 +10,7 @@ import com.microservices.trade.promotionservice.domain.module.PromotionStatusEnu
 import com.microservices.trade.promotionservice.service.PromotionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
@@ -23,6 +24,7 @@ import java.util.*;
  * ==================================
  */
 @Slf4j
+@Component
 public class PromotionServiceImp implements PromotionService {
     @Resource
     private PromotionDAO promotionDAO;

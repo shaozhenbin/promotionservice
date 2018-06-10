@@ -9,6 +9,7 @@ import com.microservices.trade.promotionservice.domain.module.VoucherStatusEnum;
 import com.microservices.trade.promotionservice.service.VoucherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
  * ==================================
  */
 @Slf4j
+@Component
 public class VoucherServiceImp implements VoucherService {
     @Resource
     private VoucherDAO voucherDAO;
