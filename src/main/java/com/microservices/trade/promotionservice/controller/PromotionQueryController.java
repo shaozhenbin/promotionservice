@@ -36,21 +36,34 @@ public class PromotionQueryController {
 
     @RequestMapping("/query/voucher/list")
     public List<VoucherVO> queryAllVoucherByUserId(@RequestParam Long userId, @RequestParam
-            Boolean available){
+            Boolean available) {
         log.info("Query all voucher by userId: {}, available: {}", userId, available);
-        List<VoucherVO> voucherVOS = voucherService.queryVoucherByUserId(userId,available);
+        List<VoucherVO> voucherVOS = voucherService.queryVoucherByUserId(userId, available);
         log.info("Query all voucher by userId: {}, available: {}, result:{}", userId, available, voucherVOS);
         return voucherVOS;
     }
 
     @RequestMapping("/query/promotion")
     public List<PromotionVO> queryAllPromotion(@RequestParam Long userId, @RequestParam Long
-            productId, @RequestParam Long amount){
-        log.info("Query all promotion with userId: {}, productId: {}", userId, productId);
+            productId, @RequestParam Long amount) {
+        log.info("Query all promotion with userId: {}, productId: {}, amount: {}", userId,
+                productId,amount);
         List<PromotionVO> promotionVOS = promotionService.queryAvailablePromotions(userId,
                 productId, amount);
-        log.info("Query all promotion with userId: {}, productId: {}, result: {}", userId,
-                productId, promotionVOS.toString());
+        log.info("Query all promotion with userId: {}, productId: {}, amount:{}, result: {}",
+                userId, productId, amount, promotionVOS.toString());
         return promotionVOS;
+    }
+
+    @RequestMapping("/verify/promotion")
+    public PromotionVO verifyPromotion(@RequestParam Long userId, @RequestParam Long promotionId,
+                                       @RequestParam Long productId, @RequestParam Long amount) {
+        log.info("verify promotion with userId: {}, productId: {}, promotionId: {}, amount: {}",
+                userId, productId, promotionId, amount);
+        PromotionVO promotionVO = promotionService.verifyPromotion(userId, productId,
+                promotionId, amount);
+        log.info("verify promotion with userId: {}, productId: {}, promotionId: {}, amount: {}," +
+                        "result: {}", userId, productId, promotionId, amount,promotionVO);
+        return promotionVO;
     }
 }

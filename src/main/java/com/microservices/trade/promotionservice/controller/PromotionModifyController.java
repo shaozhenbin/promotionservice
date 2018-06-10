@@ -1,12 +1,9 @@
 package com.microservices.trade.promotionservice.controller;
 
 import com.microservices.trade.promotionservice.domain.DO.PromotionUserDO;
-import com.microservices.trade.promotionservice.domain.DO.VoucherDO;
 import com.microservices.trade.promotionservice.domain.VO.VoucherVO;
 import com.microservices.trade.promotionservice.service.PromotionService;
 import com.microservices.trade.promotionservice.service.imp.VoucherServiceImp;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import common.ObjectResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,14 +60,16 @@ public class PromotionModifyController {
     }
 
     @ResponseBody
-    @RequestMapping("/promotion/verify")
-    public Long verifyPromotion(@RequestParam Long userId, @RequestParam Long promotionId){
+    @RequestMapping("/promotion/use")
+    public Long usePromotion(@RequestParam Long userId, @RequestParam Long promotionId){
         log.info("verify promotion,userId: {}, promotionId: {}",userId, promotionId);
-        PromotionUserDO promotionUserDO = promotionService.verifyPromotion(userId, promotionId);
+        PromotionUserDO promotionUserDO = promotionService.usePromotion(userId, promotionId);
         log.info("verify promotion,userId: {}, promotionId: {},result: {}",userId,
                 promotionId, promotionUserDO);
         return promotionUserDO.getId();
     }
+
+
 
 
 }

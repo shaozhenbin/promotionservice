@@ -19,5 +19,6 @@ public interface PromotionService {
     PromotionVO savePromotion(PromotionVO promotionVO);
     List<PromotionVO> queryAvailablePromotions(Long userId, Long productId, Long amount);
     Boolean modifyPromotion(Long userId, Long promotionMapId, Integer status);
-    PromotionUserDO verifyPromotion(Long userId, Long promotionId);
+    PromotionUserDO usePromotion(Long userId, Long promotionId);
+    PromotionVO verifyPromotion(Long userId, Long productId, Long promotionId, Long amount);
 }

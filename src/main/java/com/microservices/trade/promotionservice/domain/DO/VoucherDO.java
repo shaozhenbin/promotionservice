@@ -24,10 +24,10 @@ public class VoucherDO implements Serializable {
     private Long id;
 
     @Column(nullable = false)
-    private Long Amount;
+    private Long amount;
 
     @Column(nullable = false)
-    private Long LimitMoney;
+    private Long limitMoney;
 
     @Column(nullable = false)
     private Long timeStart;
