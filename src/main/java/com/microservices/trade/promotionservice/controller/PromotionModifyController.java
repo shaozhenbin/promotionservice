@@ -25,7 +25,7 @@ import static com.microservices.trade.promotionservice.configuration.WebConfigur
 
 @Slf4j
 @RestController
-@RequestMapping(BASIC_URL+UPDATE_PROMOTION)
+@RequestMapping(BASIC_URL + UPDATE_PROMOTION)
 public class PromotionModifyController {
 
     @Resource
@@ -36,12 +36,12 @@ public class PromotionModifyController {
 
     @ResponseBody
     @RequestMapping("/voucher/status")
-    public VoucherVO modifyVoucher(@RequestParam Long userId,@RequestParam Long voucherId,
-                                   @RequestParam Integer status){
-        log.info("modify voucher status,userId: {}, voucherId: {}, status: {}",userId, voucherId,
+    public VoucherVO modifyVoucher(@RequestParam Long userId, @RequestParam Long voucherId,
+                                   @RequestParam Integer status) {
+        log.info("modify voucher status,userId: {}, voucherId: {}, status: {}", userId, voucherId,
                 status);
-        VoucherVO voucherVO = voucherService.modifyVoucher(userId,voucherId,status);
-        log.info("modify voucher status,userId: {}, voucherId: {}, status: {},result: {}",userId,
+        VoucherVO voucherVO = voucherService.modifyVoucher(userId, voucherId, status);
+        log.info("modify voucher status,userId: {}, voucherId: {}, status: {},result: {}", userId,
                 voucherId, status, voucherVO);
         return voucherVO;
     }
@@ -50,26 +50,24 @@ public class PromotionModifyController {
     @ResponseBody
     @RequestMapping("/promotion/status")
     public Boolean modifyPromotion(@RequestParam Long userId, @RequestParam Long promotionMapId,
-                                @RequestParam Integer status){
-        log.info("modify promotion,userId: {}, promotionMapId: {}, status: {}",userId,
+                                   @RequestParam Integer status) {
+        log.info("modify promotion,userId: {}, promotionMapId: {}, status: {}", userId,
                 promotionMapId, status);
         Boolean result = promotionService.modifyPromotion(userId, promotionMapId, status);
-        log.info("modify promotion,userId: {}, promotionMapId: {}, status: {}, result: {}",userId,
+        log.info("modify promotion,userId: {}, promotionMapId: {}, status: {}, result: {}", userId,
                 promotionMapId, status, result);
         return result;
     }
 
     @ResponseBody
     @RequestMapping("/promotion/use")
-    public Long usePromotion(@RequestParam Long userId, @RequestParam Long promotionId){
-        log.info("verify promotion,userId: {}, promotionId: {}",userId, promotionId);
+    public Long usePromotion(@RequestParam Long userId, @RequestParam Long promotionId) {
+        log.info("verify promotion,userId: {}, promotionId: {}", userId, promotionId);
         PromotionUserDO promotionUserDO = promotionService.usePromotion(userId, promotionId);
-        log.info("verify promotion,userId: {}, promotionId: {},result: {}",userId,
+        log.info("verify promotion,userId: {}, promotionId: {},result: {}", userId,
                 promotionId, promotionUserDO);
         return promotionUserDO.getId();
     }
-
-
 
 
 }

@@ -27,5 +27,5 @@ public interface PromotionUserDAO extends JpaRepository<PromotionUserDO, Long> {
     @Query("update PromotionUserDO pu " +
             "set pu.promotionStatus=?3 " +
             "where pu.id = ?1 and pu.userId = ?2")
-    Long modifyStatus(Long PromotionMapId, Long userId,Integer status);
+    Integer modifyStatus(Long PromotionMapId, Long userId,Integer status);
 }

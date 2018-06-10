@@ -128,20 +128,53 @@ public class VoucherServiceImp implements VoucherService {
             log.info("当前状态已为 {} userId: {}, voucherMapId: {}", VoucherStatusEnum
                     .getVoucherStatusEnumByValue(status).name(), userId, voucherMapId);
         } else {
-            Long updateCount = voucherUserDAO.modifyStatus(voucherMapId, status);
+            Integer updateCount = voucherUserDAO.modifyStatus(voucherMapId, status);
+            if(updateCount == null || updateCount != 1){
+                log.error("抵用券状态更新失败, status: {}, updateCount: {}",status,updateCount);
+                return null;
+            }
             voucherUserDO = voucherUserDAO.findById(voucherMapId).get();
         }
 
         VoucherDO voucherDO = voucherDAO.findById(voucherUserDO.getVoucherId()).get();
-        if(voucherDO == null){
+        if (voucherDO == null) {
             log.error("未查询到抵用券, userId:{}, voucherId: {}", userId, voucherUserDO.getVoucherId());
             return null;
         }
         VoucherVO voucherVO = new VoucherVO();
-        BeanUtils.copyProperties(voucherDO,voucherVO);
-        BeanUtils.copyProperties(voucherUserDO,voucherVO);
+        BeanUtils.copyProperties(voucherDO, voucherVO);
+        BeanUtils.copyProperties(voucherUserDO, voucherVO);
         log.info("modify voucher userId: {}, voucherMapId: {}, status: {},result: {}", userId,
                 voucherMapId, status, voucherVO.toString());
+        return voucherVO;
+    }
+
+    @Override
+    public VoucherVO verifyVoucher(Long userId, Long voucherMapId, Long amount) {
+        if (userId == null || voucherMapId == null || amount == null) {
+            return null;
+        }
+        VoucherUserDO voucherUserDO = voucherUserDAO.findByIdAndUserId(voucherMapId, userId);
+        if (voucherUserDO == null) {
+            log.error("未查到用户对应抵用券信息, userId: {}, voucherMapId: {}", userId, voucherMapId);
+            return null;
+        }
+        if (voucherUserDO.getVoucherStatus() != VoucherStatusEnum.available.getValue()) {
+            log.error("验券失败, 该券状态不可用, useId: {}, voucherUserDO: {}", userId, voucherUserDO.toString());
+            return null;
+        }
+        VoucherDO voucherDO = voucherDAO.getOne(voucherUserDO.getVoucherId());
+        if(voucherDO == null){
+            log.error("未查到抵用券信息, voucherID: {}",voucherUserDO.getVoucherId());
+            return null;
+        }
+        if(voucherDO.getLimitMoney() > amount){
+            log.error("未达到用券金额, amount: {}, voucherDO: {}",amount,voucherDO.toString());
+            return null;
+        }
+        VoucherVO voucherVO = new VoucherVO();
+        BeanUtils.copyProperties(voucherDO, voucherVO);
+        BeanUtils.copyProperties(voucherUserDO, voucherVO);
         return voucherVO;
     }
 }

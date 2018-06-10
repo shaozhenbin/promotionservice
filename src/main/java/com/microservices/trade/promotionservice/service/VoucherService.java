@@ -17,4 +17,5 @@ public interface VoucherService {
     List<VoucherVO> queryVoucherByUserId(Long userId, Boolean available);
     Long offerVoucher(Long userId, Long voucherId);
     VoucherVO modifyVoucher(Long userId,Long voucherMapId, Integer status);
+    VoucherVO verifyVoucher(Long userId,Long voucherMapId, Long amount);
 }

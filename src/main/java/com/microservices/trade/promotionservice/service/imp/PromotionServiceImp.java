@@ -85,8 +85,8 @@ public class PromotionServiceImp implements PromotionService {
             return true;
         }
         //update
-        Long updateCount = promotionUserDAO.modifyStatus(promotionMapId, userId, status);
-        if (updateCount != 1) {
+        Integer updateCount = promotionUserDAO.modifyStatus(promotionMapId, userId, status);
+        if (updateCount == null|| updateCount != 1) {
             log.error("Modify Promotion Status Error update Count: {}, userId: {}, " +
                     "promotionMapId: {}", updateCount, userId, promotionMapId);
             return false;

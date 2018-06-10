@@ -63,7 +63,18 @@ public class PromotionQueryController {
         PromotionVO promotionVO = promotionService.verifyPromotion(userId, productId,
                 promotionId, amount);
         log.info("verify promotion with userId: {}, productId: {}, promotionId: {}, amount: {}," +
-                        "result: {}", userId, productId, promotionId, amount,promotionVO);
+                        "result: {}", userId, productId, promotionId, amount, promotionVO);
         return promotionVO;
+    }
+
+    @RequestMapping("/verify/voucher")
+    public VoucherVO verifyVoucher(@RequestParam Long userId, @RequestParam Long voucherMapId,
+                                     @RequestParam Long amount) {
+        log.info("verify voucher with userId: {}, voucherMapId: {}, amount: {}",
+                userId, voucherMapId, amount);
+        VoucherVO voucherVO = voucherService.verifyVoucher(userId, voucherMapId, amount);
+        log.info("verify voucher with userId: {}, voucherMapId: {}, amount: {}, result: {}",
+                userId, voucherMapId, amount, voucherVO);
+        return voucherVO;
     }
 }

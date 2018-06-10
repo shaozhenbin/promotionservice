@@ -23,6 +23,6 @@ public interface VoucherUserDAO extends JpaRepository<VoucherUserDO,Long> {
 
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query("update VoucherUserDO vu set vu.voucherStatus=?2 where vu.id=id")
-    Long modifyStatus(Long id,Integer status);
+    @Query("update VoucherUserDO vu set vu.voucherStatus=?2 where vu.id=?1")
+    Integer modifyStatus(Long id, Integer status);
 }
